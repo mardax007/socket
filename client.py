@@ -1,4 +1,5 @@
 import socket
+import pygame
 
 HEADER = 64
 PORT = 5051
