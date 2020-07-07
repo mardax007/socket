@@ -22,7 +22,7 @@ def handle_client(conn, addr):
             msg = conn.recv(msg_length).decode(FORMAT)
             if msg == DISCONNECT_MESSAGE:
                 conn.send("DISCONNECT".encode(FORMAT))
-                print(f"[{addr}] bye!")
+                print(f"Bye {addr}")
                 connected = False
 
             else:
