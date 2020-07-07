@@ -2,7 +2,7 @@ import socket
 import pygame
 
 HEADER = 64
-PORT = 5051
+PORT = 57952
 FORMAT = 'utf-8'
 DISCONNECT_MESSAGE = "!DISCONNECT"
 SERVER = "192.168.56.1"
