@@ -7,7 +7,7 @@ PORT = 57952
 SERVER = socket.gethostbyname(socket.gethostname())
 ADDR = (SERVER, PORT)
 FORMAT = 'utf-8'
-DISCONNECT_MESSAGE = "!DISCONNECT"
+DISCONNECT_MESSAGE = "!DISCONNECT-0YXf$j0daPn7&^PyQ8ups&dSF4HsVASCNPReNrd%rjQ^K#JII$4yagqnw0vwReX!r3!cY3QICiM%OEUMfcZA95ulH9*km0%nr6w"
 
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind(ADDR)
