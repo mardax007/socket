@@ -40,10 +40,18 @@ def start():
     dateandtime = datetime.now()
     print(f"[{dateandtime}] [LISTENING] Server is listening on {SERVER}")
     while True:
+        e1 = tk.Entry(master)
         conn, addr = server.accept()
         thread = threading.Thread(target=handle_client, args=(conn, addr))
         thread.start()
         print(f"[{dateandtime}] [ACTIVE CONNECTIONS] {threading.activeCount() - 1}")
+
+        master = tk.Tk()
+
+        e1.grid(row=0, column=1)
+        tk.Button(master, text='Quit', command=exitapp).grid(row=3, column=0, sticky=tk.W, pady=4)
+
+        tk.mainloop()
 dateandtime = datetime.now()
 print(f"[{dateandtime}] [STARTING] server is starting...")
 start()
