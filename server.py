@@ -1,5 +1,6 @@
 import socket
 import threading
+from datetime import datetime
 
 HEADER = 64
 PORT = 57952
@@ -12,7 +13,8 @@ server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 server.bind(ADDR)
 
 def handle_client(conn, addr):
-    print(f"[NEW CONNECTION] {addr} connected.")
+    dateandtime = datetime.now()
+    print(f"[{dateandtime}] [NEW CONNECTION] {addr} connected.")
 
     connected = True
     while connected:
@@ -22,11 +24,12 @@ def handle_client(conn, addr):
             msg = conn.recv(msg_length).decode(FORMAT)
             if msg == DISCONNECT_MESSAGE:
                 conn.send("DISCONNECT".encode(FORMAT))
-                print(f"Bye {addr}")
+                print(f"[{dateandtime}] Bye bye {addr}")
                 connected = False
 
             else:
-                print(f"[{addr}] {msg}")
+                dateandtime = datetime.now()
+                print(f"[{dateandtime}] [{addr}] {msg}")
                 conn.send("Msg received".encode(FORMAT))
 
     conn.close()
@@ -34,12 +37,13 @@ def handle_client(conn, addr):
 
 def start():
     server.listen()
-    print(f"[LISTENING] Server is listening on {SERVER}")
+    dateandtime = datetime.now()
+    print(f"[{dateandtime}] [LISTENING] Server is listening on {SERVER}")
     while True:
         conn, addr = server.accept()
         thread = threading.Thread(target=handle_client, args=(conn, addr))
         thread.start()
-        print(f"[ACTIVE CONNECTIONS] {threading.activeCount() - 1}")
-
-print("[STARTING] server is starting...")
+        print(f"[{dateandtime}] [ACTIVE CONNECTIONS] {threading.activeCount() - 1}")
+dateandtime = datetime.now()
+print(f"[{dateandtime}] [STARTING] server is starting...")
 start()

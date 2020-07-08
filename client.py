@@ -1,5 +1,6 @@
 import socket
 import tkinter as tk
+import time
 
 HEADER = 64
 PORT = 57952
@@ -26,7 +27,8 @@ def send(msg):
 
 def show_entry_fields():
     send(e1.get())
-    e1.update()
+    time.sleep(0.5)
+    e1.delete(first=0,last=100)
 
 def exitapp():
     send(DISCONNECT_MESSAGE)
