@@ -13,7 +13,7 @@ client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 client.connect(ADDR)
 
 def send(msg):
-    if msg != "" or msg != " " or msg != DISCONNECT_MESSAGE:
+    if msg != "" or msg != " ":
         message = msg.encode(FORMAT)
         msg_length = len(message)
         send_length = str(msg_length).encode(FORMAT)
@@ -21,14 +21,13 @@ def send(msg):
         client.send(send_length)
         client.send(message)
         print(client.recv(2048).decode(FORMAT))
-        print("Message: %s" % (e1.get()))
-    elif msg == DISCONNECT_MESSAGE
+
     else:
         print("NAM")
 
 def show_entry_fields():
     send(e1.get())
-    time.sleep(0.5)
+    time.sleep(0.1)
     e1.delete(first=0,last=100)
 
 def exitapp():
@@ -38,6 +37,7 @@ def exitapp():
 
 while True:
     master = tk.Tk()
+    master.title("Messager")
     tk.Label(master, text="Message").grid(row=0)
 
     e1 = tk.Entry(master)
