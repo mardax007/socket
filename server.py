@@ -24,12 +24,12 @@ def handle_client(conn, addr):
             msg = conn.recv(msg_length).decode(FORMAT)
             if msg == DISCONNECT_MESSAGE:
                 conn.send("DISCONNECTED".encode(FORMAT))
-                print(f"[{dateandtime}] Bye bye {addr}")
+                print("[" + dateandtime + "] Bye bye " + addr)
                 connected = False
 
             else:
                 dateandtime = datetime.now()
-                print(f"[{dateandtime}] [{addr}] {msg}")
+                print("[" + dateandtime + "] [" + addr + "] " + msg)
                 conn.send("Msg received".encode(FORMAT))
 
     conn.close()
@@ -38,12 +38,13 @@ def handle_client(conn, addr):
 def start():
     server.listen()
     dateandtime = datetime.now()
-    print(f"[{dateandtime}] [LISTENING] Server is listening on {SERVER}")
+    print("[" + dateandtime + "] [LISTENING] Server is listening on " + SERVER)
     while True:
+        connections = threading.activeCount() - 1
         conn, addr = server.accept()
         thread = threading.Thread(target=handle_client, args=(conn, addr))
         thread.start()
-        print(f"[{dateandtime}] [ACTIVE CONNECTIONS] {threading.activeCount() - 1}")
+        print("[" + dateandtime + "] [ACTIVE CONNECTIONS] " + connections)
 dateandtime = datetime.now()
-print(f"[{dateandtime}] [STARTING] server is starting...")
+print("[" + dateandtime + "] [STARTING] server is starting...")
 start()
