@@ -14,7 +14,7 @@ server.bind(ADDR)
 
 def handle_client(conn, addr):
     dateandtime = datetime.now()
-    print(f"[{dateandtime}] [NEW CONNECTION] {addr} connected.")
+    print("[" + dateandtime + "] [NEW CONNECTION] " + addr + " connected.")
 
     connected = True
     while connected:
