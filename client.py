@@ -9,10 +9,14 @@ DISCONNECT_MESSAGE = "!DISCONNECT-0YXf$j0daPn7&^PyQ8ups&dSF4HsVASCNPReNrd%rjQ^K#
 SERVER = "192.168.56.1"
 ADDR = (SERVER, PORT)
 
-client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-client.connect(ADDR)
+connectcounter = 0
 
 def send(msg):
+    if connectcounter == 0:
+        connectcounter + 1
+        client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        client.connect(ADDR)
+
     if msg != "" or msg != " ":
         message = msg.encode(FORMAT)
         msg_length = len(message)
@@ -26,7 +30,7 @@ def send(msg):
         print("NAM")
 
 def show_entry_fields():
-    send(e1.get())
+    send(e2.get())
     time.sleep(0.1)
     e1.delete(first=0,last=100)
 
@@ -38,12 +42,14 @@ def exitapp():
 while True:
     master = tk.Tk()
     master.title("Messager")
-    tk.Label(master, text="Message").grid(row=0)
+    tk.Label(master, text="port").grid(row=0)
+    tk.Label(master, text="Message").grid(row=1)
 
     e1 = tk.Entry(master)
     e2 = tk.Entry(master)
 
     e1.grid(row=0, column=1)
+    e2.grid(row=1, column=1)
     tk.Button(master, text='Quit', command=exitapp).grid(row=3, column=0, sticky=tk.W, pady=4)
     tk.Button(master, text='Send', command=show_entry_fields).grid(row=3, column=1, sticky=tk.W, pady=4)
 
